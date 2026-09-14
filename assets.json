@@ -1,0 +1,15 @@
+{
+  "$comment": "Official logo sources. Fetched into public/assets/ by `npm run setup`. Logos are trademarks of their owners and are not redistributed by this repo.",
+  "assets": [
+    { "file": "openai.svg", "url": "https://svgl.app/library/openai_dark.svg", "note": "white mark for dark backgrounds" },
+    { "file": "react.svg", "url": "https://svgl.app/library/react_dark.svg" },
+    { "file": "nextjs.svg", "url": "https://svgl.app/library/nextjs_icon_dark.svg", "note": "white icon" },
+    { "file": "typescript.svg", "url": "https://svgl.app/library/typescript.svg" },
+    { "file": "rust.svg", "url": "https://svgl.app/library/rust_dark.svg", "note": "white mark" },
+    { "file": "python.svg", "url": "https://svgl.app/library/python.svg" },
+    { "file": "kubernetes.svg", "url": "https://svgl.app/library/kubernetes.svg" },
+    { "file": "azure.svg", "url": "https://svgl.app/library/azure.svg" },
+    { "file": "postgresql.svg", "url": "https://svgl.app/library/postgresql.svg", "note": "official #336791" },
+    { "file": "github.svg", "url": "https://svgl.app/library/github_dark.svg", "note": "white mark" }
+  ]
+}
