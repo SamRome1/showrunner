@@ -1,0 +1,34 @@
+{
+  "name": "showrunner",
+  "version": "0.1.0",
+  "description": "A motion design system for AI-generated video. Describe a video in a brief; Claude Code builds it to broadcast standard with Remotion.",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "remotion studio",
+    "setup": "node scripts/fetch-assets.mjs",
+    "postinstall": "node scripts/fetch-assets.mjs --quiet",
+    "render": "remotion render ShortForm out/ShortForm.mp4",
+    "stills": "node scripts/stills.mjs",
+    "assets:check": "remotion still AssetCheck out/asset-check.png",
+    "lint": "eslint src && tsc",
+    "format": "prettier --write src docs scripts"
+  },
+  "dependencies": {
+    "@remotion/bundler": "4.0.417",
+    "@remotion/cli": "4.0.417",
+    "@remotion/google-fonts": "4.0.417",
+    "@remotion/renderer": "4.0.417",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.417"
+  },
+  "devDependencies": {
+    "@remotion/eslint-config-flat": "4.0.417",
+    "@types/react": "19.2.7",
+    "@types/web": "0.0.166",
+    "eslint": "9.19.0",
+    "prettier": "3.6.0",
+    "typescript": "5.9.3"
+  }
+}
