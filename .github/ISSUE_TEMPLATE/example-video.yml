@@ -1,0 +1,30 @@
+name: Example video proposal
+description: Propose a new example for the gallery. Every example starts with a brief.
+title: "Example: <working title>"
+labels: [example]
+body:
+  - type: textarea
+    id: pitch
+    attributes:
+      label: What is the video about, in two sentences?
+    validations:
+      required: true
+  - type: input
+    id: format
+    attributes:
+      label: Format
+      placeholder: "1080x1080, 30fps, ~60s, standalone"
+    validations:
+      required: true
+  - type: textarea
+    id: assets
+    attributes:
+      label: Real products or companies it references
+      description: Each needs an official asset. List them; do not draw them.
+  - type: textarea
+    id: brief
+    attributes:
+      label: Draft brief
+      description: Paste a draft in the docs/VIDEO_BRIEF_TEMPLATE.md format, or say you will run /brief.
+    validations:
+      required: true
