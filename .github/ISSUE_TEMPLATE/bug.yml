@@ -1,0 +1,29 @@
+name: Bug report
+description: Something renders wrong, fails to build, or the agent breaks a rule.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+  - type: input
+    id: composition
+    attributes:
+      label: Composition and frame
+      placeholder: "ShortForm, frame 915"
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      render: bash
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      placeholder: "macOS 15, Node 22, Remotion 4.0.417, Claude Code 2.x"
