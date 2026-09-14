@@ -1,0 +1,5 @@
+---
+description: Brief gate and motion system rules for this repo
+alwaysApply: true
+---
+Read CLAUDE.md at the repo root and follow it exactly. In short: no new video without a completed brief in the docs/VIDEO_BRIEF_TEMPLATE.md format (unless the user explicitly says they are skipping it); never draw brand logos by hand — fetch official SVGs via assets.json; all motion values come from src/theme.ts; verify with rendered stills before declaring done.
