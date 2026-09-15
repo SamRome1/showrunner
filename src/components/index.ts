@@ -12,3 +12,5 @@ export { ReplicaTopology, TOPO_W, TOPO_H, REPLICA_COUNT } from './ReplicaTopolog
 export { CheckGlyph, CrossGlyph, CylinderGlyph } from './Glyphs';
 export { Terminal } from './Terminal';
 export type { TerminalLine } from './Terminal';
+export { SizeBar } from './SizeBar';
+export type { SizeBarRow } from './SizeBar';
