@@ -10,3 +10,6 @@ export { ArchDiagram, SlotBadge, SlotRow, ARCH_NODES } from './ArchDiagram';
 export type { SlotId } from './ArchDiagram';
 export { ReplicaTopology, TOPO_W, TOPO_H, REPLICA_COUNT } from './ReplicaTopology';
 export { CheckGlyph, CrossGlyph, CylinderGlyph } from './Glyphs';
+export { PointField } from './PointField';
+export type { Pt, Box } from './pointMath';
+export { GraphLayer } from './GraphLayer';
