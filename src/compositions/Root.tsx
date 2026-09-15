@@ -5,6 +5,7 @@ import { ShortForm, SHORT_FORM_DURATION } from './ShortForm';
 import { AssetCheck } from './AssetCheck';
 import { Release, RELEASE_DURATION } from './Release';
 import { BundleSizes, BUNDLE_SIZES_DURATION } from './BundleSizes';
+import { VectorIndex, VECTOR_INDEX_DURATION, VECTOR_INDEX_SIZE } from './VectorIndex';
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -18,7 +19,14 @@ export const RemotionRoot: React.FC = () => (
     />
     {/* ---- gallery examples (one block each; keep blocks separated) ---- */}
 
-    {/* example: VectorIndex */}
+    <Composition
+      id="VectorIndex"
+      component={VectorIndex}
+      durationInFrames={VECTOR_INDEX_DURATION}
+      fps={CANVAS.fps}
+      width={VECTOR_INDEX_SIZE.width}
+      height={VECTOR_INDEX_SIZE.height}
+    />
 
     <Composition
       id="Release"

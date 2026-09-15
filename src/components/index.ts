@@ -14,3 +14,6 @@ export { Terminal } from './Terminal';
 export type { TerminalLine } from './Terminal';
 export { SizeBar } from './SizeBar';
 export type { SizeBarRow } from './SizeBar';
+export { PointField } from './PointField';
+export type { Pt, Box } from './pointMath';
+export { GraphLayer } from './GraphLayer';

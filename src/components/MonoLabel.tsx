@@ -13,6 +13,8 @@ type Props = {
   dot?: boolean;
   uppercase?: boolean;
   size?: number;
+  /** false = already on screen; render settled with no entrance. */
+  animate?: boolean;
   style?: React.CSSProperties;
 };
 
@@ -26,10 +28,11 @@ export const MonoLabel: React.FC<Props> = ({
   uppercase = true,
   size = type.monoLabel.fontSize,
   style,
+  animate = true,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const e = enter(frame, fps, delay);
+  const e = animate ? enter(frame, fps, delay) : { opacity: 1, translateY: 0, scale: 1, progress: 1 };
   const color = accent ? colors.accent : colors.textSecondary;
 
   return (
