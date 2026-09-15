@@ -10,12 +10,12 @@ const LINES: TerminalLine[] = [
   { text: 'added gradient background', at: 68, kind: 'muted', glyph: 'check' },
   { text: 'drew the logo in CSS', at: 76, kind: 'muted', glyph: 'check' },
   { text: 'centered everything', at: 84, kind: 'muted', glyph: 'check' },
-  { text: 'looks generated.', at: 126, kind: 'output' },
+  { text: 'looks generated.', at: 126, kind: 'accent' },
 ];
 
 /** The problem, told as a transcript. No ugly animation is built. */
 export const TheAsk: React.FC = () => (
-  <SceneWrapper justify="center">
-    <Terminal lines={LINES} height={380} caretUntil={60} />
+  <SceneWrapper justify="center" halo>
+    <Terminal lines={LINES} height={420} caretUntil={60} />
   </SceneWrapper>
 );
