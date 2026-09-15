@@ -3,6 +3,7 @@ import { Composition } from 'remotion';
 import { CANVAS } from '../theme';
 import { ShortForm, SHORT_FORM_DURATION } from './ShortForm';
 import { AssetCheck } from './AssetCheck';
+import { BundleSizes, BUNDLE_SIZES_DURATION } from './BundleSizes';
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -20,7 +21,14 @@ export const RemotionRoot: React.FC = () => (
 
     {/* example: Release */}
 
-    {/* example: BundleSizes */}
+    <Composition
+      id="BundleSizes"
+      component={BundleSizes}
+      durationInFrames={BUNDLE_SIZES_DURATION}
+      fps={30}
+      width={1920}
+      height={1080}
+    />
 
     {/* ---- tooling ---- */}
     <Composition
