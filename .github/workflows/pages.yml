@@ -1,8 +1,7 @@
 name: pages
+# GitHub Pages is unavailable on private repos under the free plan.
+# Run manually (or restore the push trigger) once the repo is public.
 on:
-  push:
-    branches: [main]
-    paths: ['site/**']
   workflow_dispatch:
 permissions:
   contents: read
