@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>showrunner — a motion design system for AI-generated video</title>
+<meta property="og:title" content="showrunner" />
+<meta property="og:description" content="Describe a video in a brief. Claude Code builds it in Remotion to a standard you would ship." />
+<meta property="og:image" content="https://raw.githubusercontent.com/SamRome1/showrunner/main/docs/media/social-preview.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root { --deep:#336791; --sky:#5FA8FF; --amber:#F59E0B; --ink:#B8C4D6; --top:#050810; --bottom:#0B1E33; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--top); color: #fff; font-family: Inter, system-ui, sans-serif; }
+  body { min-height: 100vh; background: linear-gradient(160deg, var(--top), var(--bottom)); overflow-x: hidden; }
+  .wash { position: fixed; inset: -20%; pointer-events: none; z-index: 0;
+    background: radial-gradient(circle at 25% 30%, rgba(51,103,145,.55), transparent 40%),
+                radial-gradient(circle at 80% 75%, rgba(95,168,255,.22), transparent 38%),
+                radial-gradient(circle at 70% 15%, rgba(245,158,11,.13), transparent 30%);
+    filter: blur(40px); animation: drift 24s ease-in-out infinite alternate; }
+  @keyframes drift { from { transform: translate(0,0) } to { transform: translate(-3%, 2%) } }
+  .grid { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .14;
+    background-image: radial-gradient(circle, var(--sky) 1px, transparent 1.6px); background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at 50% 40%, #000 30%, transparent 85%); -webkit-mask-image: radial-gradient(ellipse at 50% 40%, #000 30%, transparent 85%); }
+  main { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 96px 24px 120px; }
+  .kicker { font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); }
+  h1 { font-size: clamp(56px, 10vw, 112px); font-weight: 800; letter-spacing: -.045em; line-height: .98; margin: 14px 0 20px;
+    background: linear-gradient(100deg, var(--sky), #fff); -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 0 18px rgba(95,168,255,.35)); }
+  .lede { font-size: clamp(18px, 2.2vw, 26px); color: var(--ink); max-width: 720px; line-height: 1.4; }
+  .cta { display: flex; gap: 12px; flex-wrap: wrap; margin: 36px 0 0; }
+  .cta a, .cta code { font-family: 'JetBrains Mono', monospace; font-size: 15px; padding: 12px 18px; border-radius: 12px;
+    border: 1px solid rgba(160,190,255,.32); background: rgba(20,34,60,.55); color: #fff; text-decoration: none;
+    box-shadow: 0 0 30px rgba(95,168,255,.18); backdrop-filter: blur(6px); }
+  .cta a.primary { background: linear-gradient(90deg, var(--deep), var(--sky)); border-color: transparent; }
+  section { margin-top: 96px; }
+  h2 { font-size: 34px; letter-spacing: -.02em; margin: 0 0 8px; }
+  .sub { color: var(--ink); margin: 0 0 28px; }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .card { position: relative; overflow: hidden; border-radius: 18px; border: 1px solid rgba(160,190,255,.18); background: rgba(20,34,60,.5);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 24px 60px rgba(0,0,0,.4); }
+  .card video { display: block; width: 100%; height: auto; background: #050810; }
+  .card .meta { padding: 16px 18px 18px; }
+  .card .name { font-weight: 700; font-size: 18px; }
+  .card .fmt { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 1.5px; color: var(--amber); margin-left: 8px; }
+  .card p { color: var(--ink); margin: 6px 0 10px; font-size: 15px; line-height: 1.45; }
+  .card a { color: var(--sky); text-decoration: none; font-size: 14px; margin-right: 12px; }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .step { padding: 22px; border-radius: 16px; border: 1px solid rgba(160,190,255,.18); background: rgba(20,34,60,.5); }
+  .step b { display: block; color: var(--sky); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 2px; margin-bottom: 8px; }
+  footer { margin-top: 96px; color: #7C8AA5; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wash"></div><div class="grid"></div>
+<main>
+  <div class="kicker">for Claude Code · Cursor · Codex · Remotion</div>
+  <h1>showrunner</h1>
+  <p class="lede">A motion design system for AI-generated video. Describe it in a brief. The agent builds it in Remotion, inside a grammar that makes it look like a studio made it.</p>
+  <div class="cta">
+    <a class="primary" href="https://github.com/SamRome1/showrunner">GitHub →</a>
+    <code>npx degit SamRome1/showrunner my-video</code>
+  </div>
+
+  <section>
+    <h2>Gallery</h2>
+    <p class="sub">Four briefs, four videos, three formats. Every hold, frame range, and on-screen string came from the brief next to it.</p>
+    <div class="gallery" id="gallery"></div>
+  </section>
+
+  <section>
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><b>01 · the brief gate</b>Ask for a video and the agent hands you a brief template instead of code. Canvas, palette, assets, scenes as timed beats with exact text. It cannot be skipped by accident.</div>
+      <div class="step"><b>02 · the asset rule</b>No logo is ever drawn by hand. Official SVGs are fetched from their source, verified on a contact sheet, and reported before a single scene is built.</div>
+      <div class="step"><b>03 · one grammar</b>Animated canvas, glass surfaces, glow that breathes, connectors with travelling pulses, kinetic type, a single warm accent. Nothing ever sits still.</div>
+      <div class="step"><b>04 · proof before done</b>The agent renders one still per beat, reviews them, fixes what is off, then renders the MP4. CI does the same on every push.</div>
+    </div>
+  </section>
+
+  <footer>MIT · Logos are trademarks of their owners, fetched from official sources at install time.</footer>
+</main>
+<script>
+  const R = 'https://github.com/SamRome1/showrunner/releases/download/v0.1.0/';
+  const G = 'https://raw.githubusercontent.com/SamRome1/showrunner/main/docs/media/';
+  const items = [
+    { id: 'shortform-openai-postgres', name: 'ShortForm', fmt: '1:1 · 90s', blurb: 'OpenAI runs ChatGPT on one unsharded Postgres primary. Cited to PGConf.dev 2025.', brief: 'shortform-openai-postgres' },
+    { id: 'release', name: 'Release', fmt: '1:1 · 50s', blurb: 'The showrunner launch video: the gate, the asset rule, the grammar, verification.', brief: 'release' },
+    { id: 'bundle-sizes', name: 'BundleSizes', fmt: '16:9 · 54s', blurb: 'Runtime sizes of five frameworks from live bundlejs measurements.', brief: 'bundle-sizes' },
+    { id: 'vector-index', name: 'VectorIndex', fmt: '9:16 · 50s', blurb: 'What an HNSW index does, with zero brand assets.', brief: 'vector-index' },
+  ];
+  document.getElementById('gallery').innerHTML = items.map(i => `
+    <div class="card">
+      <video src="${R}${i.id}.mp4" poster="${G}${i.id === 'shortform-openai-postgres' ? 'hero' : i.id}.gif" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="meta">
+        <span class="name">${i.name}</span><span class="fmt">${i.fmt}</span>
+        <p>${i.blurb}</p>
+        <a href="https://github.com/SamRome1/showrunner/blob/main/docs/briefs/${i.brief}.md">brief</a>
+        <a href="${R}${i.id}.mp4">mp4</a>
+      </div>
+    </div>`).join('');
+</script>
+</body>
+</html>
