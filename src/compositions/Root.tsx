@@ -14,6 +14,15 @@ export const RemotionRoot: React.FC = () => (
       width={CANVAS.width}
       height={CANVAS.height}
     />
+    {/* ---- gallery examples (one block each; keep blocks separated) ---- */}
+
+    {/* example: VectorIndex */}
+
+    {/* example: Release */}
+
+    {/* example: BundleSizes */}
+
+    {/* ---- tooling ---- */}
     <Composition
       id="AssetCheck"
       component={AssetCheck}
