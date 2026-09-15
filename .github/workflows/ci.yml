@@ -16,8 +16,13 @@ jobs:
       - run: npm run setup
       - run: npm run lint
       - run: npx remotion browser ensure
-      - name: Render one still per scene
+      - name: Render one still per scene (ShortForm)
         run: node scripts/stills.mjs ShortForm 60 305 620 840 1005 1255 1455 1590 1825 2250 2415 2640
+      - name: Render one still per gallery example
+        run: |
+          node scripts/stills.mjs Release 100 260 500 800 1100 1300 1460
+          node scripts/stills.mjs BundleSizes 80 250 700 1050 1280 1500
+          node scripts/stills.mjs VectorIndex 80 300 540 800 1100 1320 1460
       - uses: actions/upload-artifact@v4
         with:
           name: stills
