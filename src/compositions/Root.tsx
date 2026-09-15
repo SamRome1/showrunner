@@ -3,6 +3,7 @@ import { Composition } from 'remotion';
 import { CANVAS } from '../theme';
 import { ShortForm, SHORT_FORM_DURATION } from './ShortForm';
 import { AssetCheck } from './AssetCheck';
+import { Release, RELEASE_DURATION } from './Release';
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -18,7 +19,14 @@ export const RemotionRoot: React.FC = () => (
 
     {/* example: VectorIndex */}
 
-    {/* example: Release */}
+    <Composition
+      id="Release"
+      component={Release}
+      durationInFrames={RELEASE_DURATION}
+      fps={CANVAS.fps}
+      width={CANVAS.width}
+      height={CANVAS.height}
+    />
 
     {/* example: BundleSizes */}
 
