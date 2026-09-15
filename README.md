@@ -54,7 +54,8 @@ Then open the folder in Claude Code and say what you want to make. You will get 
 npm run render                                  # flagship MP4 → out/ShortForm.mp4
 npx remotion render VectorIndex out/VectorIndex.mp4   # any composition by id
 node scripts/stills.mjs ShortForm 60 305 1005   # one PNG per frame → out/stills/
-npm run assets:check                            # contact sheet of every logo on black
+npm run assets:check                            # contact sheet of every logo on the canvas
+npm run brand -- --deep #hex --sky #hex --amber #hex   # re-theme the whole system
 ```
 
 ## Gallery
@@ -69,6 +70,19 @@ Four compositions, four briefs, three canvas formats. Full-quality MP4s are atta
 | <img src="docs/media/vector-index.gif" width="248" alt="VectorIndex" /> | **VectorIndex** · 9:16 · 50s<br/>What an HNSW index does, with zero brand assets. The graph and the 8-hop search are computed at render time.<br/>[brief](docs/briefs/vector-index.md) · [mp4](https://github.com/SamRome1/showrunner/releases/download/v0.1.0/vector-index.mp4) · `src/scenes/vector-index/` |
 
 Two components carry the flagship: `ArchDiagram` (a system diagram with named slots that scenes populate and then collapse) and `ReplicaTopology` (one primary and 48 replicas, reused at half scale inside a boundary circle). The other examples added `Terminal`, `SizeBar`, `PointField`, and `GraphLayer` the same way: built once because a brief named them, then shared.
+
+## Make it yours
+
+The examples are about Postgres and JavaScript frameworks because those have public data and official logos. Your video will be about your product. Three steps:
+
+```bash
+npx degit SamRome1/showrunner my-launch-video && cd my-launch-video && npm install
+npm run brand -- --deep "#1F2A44" --sky "#7C9CFF" --amber "#FF7A59"   # your three hues; everything re-themes
+```
+
+Then add your logos to `assets.json` (official SVGs only, the agent will refuse to draw one), run `npm run setup`, and open the folder in Claude Code. Say what you want. You get the brief template back. Fill it in or run `/brief`, and the agent builds your video inside the same grammar that produced the gallery above.
+
+`ProductLaunch` in the gallery is exactly this path applied to a fictional product with no logo of its own: the wordmark is type, the stack logos are official, everything else is the system.
 
 ## What lives where
 

@@ -11,6 +11,7 @@
     "render": "remotion render ShortForm out/ShortForm.mp4",
     "stills": "node scripts/stills.mjs",
     "assets:check": "remotion still AssetCheck out/asset-check.png",
+    "brand": "node scripts/brand.mjs",
     "lint": "eslint src && tsc",
     "format": "prettier --write src docs scripts"
   },
