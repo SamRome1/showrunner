@@ -15,6 +15,8 @@ All notable changes to this project are documented here. The format follows [Kee
 - Official-logo manifest with fetch-on-install; `AssetCheck` contact sheet.
 - `scripts/stills.mjs` per-beat verification; CI rendering one still per scene.
 - Gallery: `Release` (1:1 launch video), `BundleSizes` (16:9 data story from live bundlejs measurements), `VectorIndex` (9:16 zero-logo HNSW explainer), each with its brief.
-- Components: `Terminal`, `SizeBar`, `PointField`, `GraphLayer`.
+- Gallery: `ProductLaunch` (16:9 launch video for a fictional product — the "make it yours" path).
+- `npm run brand` re-themes the palette; `AGENTS.md`; hosted gallery page in `site/`; launch kit in `docs/launch/`.
+- Components: `Terminal`, `SizeBar`, `PointField`, `GraphLayer`, `SearchMock`.
 - Before/after contrast GIF and social preview image.
 - Issue and PR templates, code of conduct, roadmap issues.

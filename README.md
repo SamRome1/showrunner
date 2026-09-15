@@ -60,16 +60,17 @@ npm run brand -- --deep #hex --sky #hex --amber #hex   # re-theme the whole syst
 
 ## Gallery
 
-Four compositions, four briefs, three canvas formats. Full-quality MP4s are attached to the [latest release](https://github.com/SamRome1/showrunner/releases). Every frame range, hold, and on-screen string in the code came from the brief next to it.
+Five compositions, five briefs, three canvas formats. Full-quality MP4s are attached to the [latest release](https://github.com/SamRome1/showrunner/releases). Every frame range, hold, and on-screen string in the code came from the brief next to it.
 
 | | |
 |---|---|
 | <img src="docs/media/hero.gif" width="440" alt="ShortForm" /> | **ShortForm** · 1:1 · 90s<br/>OpenAI runs ChatGPT on one unsharded Postgres primary. Cited to Bohan Zhang, PGConf.dev 2025.<br/>[brief](docs/briefs/shortform-openai-postgres.md) · [mp4](https://github.com/SamRome1/showrunner/releases/download/v0.1.0/shortform-openai-postgres.mp4) · `src/scenes/` |
 | <img src="docs/media/release.gif" width="440" alt="Release" /> | **Release** · 1:1 · 50s<br/>The showrunner v0.1 launch video: the gate, the asset rule, the motion grammar, verification.<br/>[brief](docs/briefs/release.md) · [mp4](https://github.com/SamRome1/showrunner/releases/download/v0.1.0/release.mp4) · `src/scenes/release/` |
 | <img src="docs/media/bundle-sizes.gif" width="440" alt="BundleSizes" /> | **BundleSizes** · 16:9 · 54s<br/>Min+gzip runtime size of Preact, Solid, Svelte, Vue, and React from live bundlejs measurements. Official logos, one accent.<br/>[brief](docs/briefs/bundle-sizes.md) · [mp4](https://github.com/SamRome1/showrunner/releases/download/v0.1.0/bundle-sizes.mp4) · `src/scenes/bundle-sizes/` |
+| <img src="docs/media/product-launch.gif" width="440" alt="ProductLaunch" /> | **ProductLaunch** · 16:9 · 45s<br/>A launch video for a fictional product with no logo of its own. This is the "make it yours" path: type for the wordmark, official logos for the stack, the system for everything else.<br/>[brief](docs/briefs/product-launch.md) · [mp4](https://github.com/SamRome1/showrunner/releases/download/v0.1.0/product-launch.mp4) · `src/scenes/product-launch/` |
 | <img src="docs/media/vector-index.gif" width="248" alt="VectorIndex" /> | **VectorIndex** · 9:16 · 50s<br/>What an HNSW index does, with zero brand assets. The graph and the 8-hop search are computed at render time.<br/>[brief](docs/briefs/vector-index.md) · [mp4](https://github.com/SamRome1/showrunner/releases/download/v0.1.0/vector-index.mp4) · `src/scenes/vector-index/` |
 
-Two components carry the flagship: `ArchDiagram` (a system diagram with named slots that scenes populate and then collapse) and `ReplicaTopology` (one primary and 48 replicas, reused at half scale inside a boundary circle). The other examples added `Terminal`, `SizeBar`, `PointField`, and `GraphLayer` the same way: built once because a brief named them, then shared.
+Two components carry the flagship: `ArchDiagram` (a system diagram with named slots that scenes populate and then collapse) and `ReplicaTopology` (one primary and 48 replicas, reused at half scale inside a boundary circle). The other examples added `Terminal`, `SizeBar`, `PointField`, `GraphLayer`, and `SearchMock` the same way: built once because a brief named them, then shared.
 
 ## Make it yours
 
