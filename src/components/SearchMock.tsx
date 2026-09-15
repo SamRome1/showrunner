@@ -57,10 +57,13 @@ export const SearchMock: React.FC<Props> = ({
     const lastFrame = typeAt + (query.length - 1) * framesPerChar;
     resultsAt = doneTyping ? lastFrame + latencyFrames : null;
   } else if (typedCount > 0) {
-    resultsAt = lastKeyFrame + latencyFrames;
+    // live: results appear once, `latencyFrames` after the first keystroke, and
+    // stay on screen while the list narrows — no blink between keystrokes.
+    resultsAt = typeAt + latencyFrames;
   }
   const showResults = resultsAt !== null && frame >= resultsAt;
   const waiting = typedCount > 0 && !showResults;
+  void lastKeyFrame;
   // live mode narrows the list as the query grows
   const visible = mode === 'live' ? results.slice(0, Math.max(2, results.length - Math.floor(typedCount / 6))) : results;
   const readoutIn = resultsAt !== null ? Math.max(0, Math.min(1, (frame - resultsAt) / 12)) : 0;
