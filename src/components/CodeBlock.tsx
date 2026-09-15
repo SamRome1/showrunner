@@ -1,6 +1,7 @@
 import React from 'react';
 import { useCurrentFrame, useVideoConfig } from 'remotion';
-import { colors, enter, radius, timing, type } from '../theme';
+import { breathe, colors, enter, glass, glow, palette, radius, timing, type } from '../theme';
+import { LightSweep } from './LightSweep';
 
 export type CodeToken = { text: string; color?: string };
 export type CodeLine = string | CodeToken[];
@@ -8,24 +9,16 @@ export type CodeLine = string | CodeToken[];
 type Props = {
   lines: CodeLine[];
   delay?: number;
-  /** Frames between each line's entrance. */
   stagger?: number;
-  /** 0-based line indices to highlight with the accent color. */
   highlight?: number[];
-  /** Frame at which highlight becomes active (defaults to after all lines are in). */
   highlightAt?: number;
   fontSize?: number;
   width?: number | string;
   showLineNumbers?: boolean;
-  /** Optional filename shown in a header bar. */
   filename?: string;
+  animate?: boolean;
   style?: React.CSSProperties;
 };
-
-const withAlpha = (hex: string, a: number) =>
-  `${hex}${Math.round(Math.max(0, Math.min(1, a)) * 255)
-    .toString(16)
-    .padStart(2, '0')}`;
 
 const renderLine = (line: CodeLine) => {
   if (typeof line === 'string') return line.length ? line : ' ';
@@ -36,10 +29,7 @@ const renderLine = (line: CodeLine) => {
   ));
 };
 
-/**
- * Bordered JetBrains Mono code panel. Lines rise in one by one; highlighted
- * lines get an accent text color and a 1px accent rule on the left.
- */
+/** Glass code panel. Lines rise in; highlighted lines get an amber rule and glow. */
 export const CodeBlock: React.FC<Props> = ({
   lines,
   delay = 0,
@@ -50,22 +40,26 @@ export const CodeBlock: React.FC<Props> = ({
   width = '100%',
   showLineNumbers = false,
   filename,
+  animate = true,
   style,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const frameE = enter(frame, fps, delay);
+  const settled = { opacity: 1, translateY: 0, scale: 1, progress: 1 };
+  const frameE = animate ? enter(frame, fps, delay) : settled;
   const hlStart = highlightAt ?? delay + lines.length * stagger + 12;
-  const hl = enter(frame, fps, hlStart).progress;
+  const hl = animate ? enter(frame, fps, hlStart).progress : 1;
+  const br = breathe(frame, 80, 0.6, 1);
 
   return (
     <div
       style={{
+        position: 'relative',
         width,
-        border: `1px solid ${colors.border}`,
+        ...glass(0.2),
         borderRadius: radius.md,
-        backgroundColor: colors.surface,
         overflow: 'hidden',
+        boxShadow: `${glow(palette.deep, 0.6, 40)}, 0 24px 60px rgba(0,0,0,0.45)`,
         opacity: frameE.opacity,
         transform: `translateY(${frameE.translateY}px) scale(${frameE.scale})`,
         ...style,
@@ -80,14 +74,22 @@ export const CodeBlock: React.FC<Props> = ({
             color: colors.textSecondary,
             padding: '14px 24px',
             borderBottom: `1px solid ${colors.border}`,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
           }}
         >
+          <span style={{ display: 'inline-flex', gap: 6 }}>
+            {[palette.sky, palette.amber, colors.zinc600].map((c, i) => (
+              <span key={i} style={{ width: 9, height: 9, borderRadius: 999, backgroundColor: c, opacity: 0.8 }} />
+            ))}
+          </span>
           {filename}
         </div>
       ) : null}
       <div style={{ padding: '24px 0' }}>
         {lines.map((line, i) => {
-          const e = enter(frame, fps, delay + 6 + i * stagger);
+          const e = animate ? enter(frame, fps, delay + 6 + i * stagger) : settled;
           const isHl = highlight.includes(i);
           const hlAmt = isHl ? hl : 0;
           return (
@@ -98,30 +100,23 @@ export const CodeBlock: React.FC<Props> = ({
                 fontSize,
                 display: 'flex',
                 padding: '0 24px 0 20px',
-                borderLeft: `2px solid ${isHl ? withAlpha(colors.accent, hlAmt) : 'transparent'}`,
+                borderLeft: `2px solid ${isHl ? `rgba(245,158,11,${hlAmt})` : 'transparent'}`,
+                background: isHl ? `linear-gradient(90deg, rgba(245,158,11,${0.14 * hlAmt * br}), transparent 70%)` : undefined,
                 color: isHl ? colors.text : colors.textSecondary,
-                opacity: e.opacity * (highlight.length && !isHl ? 1 - hl * 0.5 : 1),
+                opacity: e.opacity * (highlight.length && !isHl ? 1 - hl * 0.45 : 1),
                 transform: `translateY(${e.translateY}px)`,
                 whiteSpace: 'pre',
               }}
             >
               {showLineNumbers ? (
-                <span
-                  style={{
-                    width: 40,
-                    flexShrink: 0,
-                    color: colors.textTertiary,
-                    userSelect: 'none',
-                  }}
-                >
-                  {i + 1}
-                </span>
+                <span style={{ width: 40, flexShrink: 0, color: colors.textTertiary, userSelect: 'none' }}>{i + 1}</span>
               ) : null}
               <span>{renderLine(line)}</span>
             </div>
           );
         })}
       </div>
+      <LightSweep period={180} phase={delay * 7} opacity={0.07} />
     </div>
   );
 };

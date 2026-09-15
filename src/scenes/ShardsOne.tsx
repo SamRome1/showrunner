@@ -2,7 +2,7 @@ import React from 'react';
 import { AbsoluteFill, Img, staticFile, useCurrentFrame, useVideoConfig } from 'remotion';
 import { ReplicaTopology, SceneWrapper, TOPO_W } from '../components';
 import { ELEPHANT_HERO } from './CollapseToElephant';
-import { CANVAS, colors, fonts, itp, lerp, slowSpring, typeOut } from '../theme';
+import { breathe, CANVAS, colors, fonts, glass, glow, itp, lerp, palette, slowSpring, typeOut } from '../theme';
 
 export const SHARDS_ONE_DURATION = 300;
 
@@ -23,7 +23,8 @@ export const ShardsOne: React.FC = () => {
   const dock = slowSpring(frame, fps, 0, DOCK_LEN);
   const size = lerp(ELEPHANT_HERO, ELEPHANT_SMALL, dock);
   const cy = lerp(CANVAS.height / 2, ELEPHANT_Y, dock);
-  const dim = itp(frame, DIM_AT, DIM_AT + 12, 1, 0.4);
+  const dim = itp(frame, DIM_AT, DIM_AT + 12, 1, 0.45);
+  const br = breathe(frame, 60, 0.6, 1);
   const text = typeOut('shards: 1', frame, TYPE_AT, 3);
   const caretOn = frame >= TYPE_AT && Math.floor(frame / 15) % 2 === 0;
 
@@ -39,9 +40,10 @@ export const ShardsOne: React.FC = () => {
             width: size,
             height: size,
             objectFit: 'contain',
+            filter: `drop-shadow(0 0 ${22 * br}px ${palette.sky}99)`,
           }}
         />
-        <div style={{ position: 'absolute', left: CANVAS.width / 2 - TOPO_W / 2, top: TOPO_TOP }}>
+        <div style={{ position: 'absolute', left: CANVAS.width / 2 - TOPO_W / 2, top: TOPO_TOP, transform: 'scale(1.18)', transformOrigin: '50% 0%' }}>
           <ReplicaTopology primaryAt={PRIMARY_AT} replicasAt={REPLICAS_AT} stagger={STAGGER} />
         </div>
       </AbsoluteFill>
@@ -51,10 +53,13 @@ export const ShardsOne: React.FC = () => {
           <div
             style={{
               fontFamily: fonts.mono,
-              fontSize: 44,
+              fontSize: 60,
               color: colors.text,
-              backgroundColor: colors.bg,
-              padding: '18px 36px',
+              ...glass(0.8),
+              borderColor: `rgba(245,158,11,${0.5 + 0.4 * br})`,
+              boxShadow: `${glow(palette.amber, br, 50)}, inset 0 1px 0 rgba(255,255,255,0.08)`,
+              borderRadius: 16,
+              padding: '22px 44px',
               letterSpacing: 0.5,
             }}
           >
