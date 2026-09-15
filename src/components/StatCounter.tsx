@@ -1,22 +1,19 @@
 import React from 'react';
 import { spring, useCurrentFrame, useVideoConfig } from 'remotion';
-import { colors, enter, springs, type } from '../theme';
+import { breathe, colors, enter, gradientText, palette, springs, textGlow, type } from '../theme';
 
 type Props = {
-  /** Final value. */
   value: number;
-  /** Text before the number, e.g. "$". */
   prefix?: string;
-  /** Text after the number, e.g. "%" or "k". */
   suffix?: string;
-  /** Caption under the number. */
   label?: string;
   delay?: number;
-  /** Frames the count-up takes (default 45). */
   duration?: number;
   decimals?: number;
-  /** Color the number with the accent instead of white. */
+  /** Amber numerals for the highlight moment. */
   accent?: boolean;
+  /** Sky → white gradient numerals (default). */
+  gradient?: boolean;
   fontSize?: number;
   weight?: number;
   letterSpacing?: number;
@@ -28,7 +25,7 @@ type Props = {
 const format = (n: number, decimals: number) =>
   n.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
 
-/** Large Inter numeral that counts up, with an optional mono-style caption. */
+/** Large numeral that counts up with a pop, glows, and breathes while it holds. */
 export const StatCounter: React.FC<Props> = ({
   value,
   prefix = '',
@@ -38,6 +35,7 @@ export const StatCounter: React.FC<Props> = ({
   duration = 45,
   decimals = 0,
   accent = false,
+  gradient = true,
   fontSize = type.stat.fontSize,
   weight = type.stat.fontWeight,
   letterSpacing = type.stat.letterSpacing,
@@ -48,13 +46,11 @@ export const StatCounter: React.FC<Props> = ({
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const e = enter(frame, fps, delay);
-  const count = spring({
-    fps,
-    frame: frame - delay,
-    config: springs.enter,
-    durationInFrames: duration,
-  });
-  const current = value * count;
+  const count = spring({ fps, frame: frame - delay, config: springs.drift, durationInFrames: duration });
+  const settle = spring({ fps, frame: frame - delay - duration + 10, config: springs.pop });
+  const current = value * Math.min(1, count);
+  const hue = accent ? palette.amber : palette.sky;
+  const br = breathe(frame, 100, 0.65, 1, delay);
 
   return (
     <div
@@ -64,7 +60,7 @@ export const StatCounter: React.FC<Props> = ({
         alignItems: align === 'center' ? 'center' : 'flex-start',
         gap: 28,
         opacity: e.opacity,
-        transform: `translateY(${e.translateY}px) scale(${e.scale})`,
+        transform: `translateY(${e.translateY}px) scale(${e.scale * (1 + 0.03 * settle * (1 - settle))})`,
         transformOrigin: align === 'center' ? '50% 50%' : '0% 50%',
         ...style,
       }}
@@ -75,8 +71,11 @@ export const StatCounter: React.FC<Props> = ({
           fontSize,
           fontWeight: weight,
           letterSpacing,
-          color: accent ? colors.accent : colors.text,
+          color: accent ? palette.amber : colors.text,
           fontVariantNumeric: 'tabular-nums',
+          filter: textGlow(hue, br),
+          ...(gradient && !accent ? gradientText(palette.sky, palette.white, 95) : null),
+          ...(accent ? gradientText(palette.amberSoft, palette.amber, 95) : null),
           ...numeralStyle,
         }}
       >
@@ -85,9 +84,7 @@ export const StatCounter: React.FC<Props> = ({
         {suffix}
       </div>
       {label ? (
-        <div style={{ ...type.monoLabel, color: colors.textSecondary, textTransform: 'uppercase' }}>
-          {label}
-        </div>
+        <div style={{ ...type.monoLabel, color: colors.textSecondary, textTransform: 'uppercase' }}>{label}</div>
       ) : null}
     </div>
   );

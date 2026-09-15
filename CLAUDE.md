@@ -1,6 +1,6 @@
 # showrunner — agent instructions
 
-This repo is a motion design system for AI-generated video. Your job is to turn a **brief** into a Remotion composition that looks professionally designed. The rules below exist because unguided AI video looks generated. Follow them exactly.
+This repo is a motion design system for AI-generated video. Your job is to turn a **brief** into a Remotion composition that looks like a studio made it: dense, luminous, constantly in motion, and disciplined. The rules below exist because unguided AI video looks generated — either chaotic or dead. Follow them exactly.
 
 ## REQUIRED FIRST STEP — the brief gate
 
@@ -29,14 +29,20 @@ Edits to an existing composition do not need a new brief — read the one in `do
 - On dark canvases use white/light variants. `filter: invert` only on pure monochrome marks, never on color logos.
 - Generic shapes (cylinders, boxes, checkmarks) are fine as stroke-drawn SVG in `src/components/Glyphs.tsx`.
 
-## Motion system defaults (`src/theme.ts`)
+## Visual + motion system (`src/theme.ts`) — kinetic
 
-- Entrances: `enter(frame, fps, delay)` → opacity 0→1, 12px rise, scale 0.98→1.0, `spring({ damping: 200 })`. No bounce, no overshoot, no rotation.
-- Exits: `exitFade`, 6–8 frames. `SceneWrapper` applies it automatically; pass `exit={false}` for hard cuts or when the next scene continues the same elements.
-- Stagger siblings 3–5 frames (`timing.stagger`). Faster only when the brief says so.
-- Hold finished compositions ≥20 frames.
-- Text below 12px never. One accent color per project (`ACCENT`).
-- Any deliberate violation must be named in the brief under "Sanctioned exceptions" and commented in code.
+The look is **dense, luminous, and always moving**. Every frame should attract the eye on mute.
+
+- **Canvas**: never flat black. `SceneWrapper` renders an animated gradient wash (`GradientWash`), a drifting `DotGrid`, and a `Particles` field under every scene. Add `halo` for hero / type-only scenes. Content sits on top in the safe zone (`raw` for absolutely positioned scenes).
+- **Palette** (`palette`): deep Postgres blue `#336791` for structure, sky `#5FA8FF` as the active accent, amber `#F59E0B` as the single warm highlight — the one thing to look at in a frame. White / `#B8C4D6` text. No other saturated hues except official logo colors.
+- **Surfaces**: `glass(active)` panels (translucent fill, 1px luminous border, inner highlight) — never opaque black boxes. Cards and tiles get a `LightSweep`.
+- **Glow**: `glow()` on active elements, `textGlow()` on headlines and numerals, `gradientText()` for hero numerals. Bloom breathes with `breathe()`.
+- **Entrances**: `enter(frame, fps, delay)` → opacity, 24px rise, scale 0.92→1 with a slight overshoot (`springs.enter`, damping 14). `springs.pop` for badges/stamps, `springs.drift` for whole-composition moves.
+- **Ambient layer — required**: nothing sits fully still. Use `drift()` on idle elements, `breathe()` on glow/borders, `FlowLine` for any connector (travelling pulses), rolling shimmer across grids. Holds are alive, not frozen.
+- **Kinetic type**: `Headline` enters word-by-word; use `Accent` (amber) or `Sky` spans for emphasis. Big sizes: hero 112, headline 76, stats 168.
+- **Exits**: `exitFade` — 8-frame fade with a small scale-down. The canvas never fades; only content does, so cuts feel continuous.
+- **Density**: fill the frame. Layer background → midground → foreground. Stagger siblings 3 frames. Avoid single small elements on an empty canvas.
+- **Hard limits**: text ≥ 14px on 1080 canvases; official logos only; no emoji; any deliberate break from the system is named in the brief under "Sanctioned exceptions" and commented in code.
 
 ## Verification before you say "done"
 
@@ -53,8 +59,9 @@ assets.json              official logo manifest → public/assets/ (gitignored, 
 docs/VIDEO_BRIEF_TEMPLATE.md
 docs/briefs/             one brief per composition
 src/theme.ts             colors, fonts, spacing, springs, enter/exit helpers
-src/components/          SceneWrapper, Headline, MonoLabel, LogoBadge, CodeBlock, StatCounter,
-                         ArchDiagram, ReplicaTopology, Glyphs
+src/components/          SceneWrapper, Headline, MonoLabel, LogoBadge, CodeBlock, StatCounter, Glyphs,
+                         ambient: GradientWash, Particles, DotGrid, Halo, FlowLine, LightSweep,
+                         load-bearing: ArchDiagram, ReplicaTopology, Terminal, SizeBar, PointField, GraphLayer
 src/scenes/              one file per scene, each exporting its component + DURATION
 src/compositions/        Root.tsx registers compositions; ShortForm sequences scenes with <Series>
 scripts/                 fetch-assets.mjs, stills.mjs

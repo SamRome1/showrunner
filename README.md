@@ -19,20 +19,16 @@
 
 ## The problem
 
-Ask an AI agent for a video and you get one: bouncing text, gradients, a hand-drawn approximation of a logo, everything crowded into the middle. The tooling is fine. What is missing is the discipline a motion designer brings before the first keyframe.
+Ask an AI agent for a video and you get one of two things: a chaotic pile of bouncing text and hand-drawn logos, or a flat slideshow that sits dead on screen. The tooling is fine. What is missing is the discipline a motion designer brings before the first keyframe: a palette, a grammar, and a layer of ambient life.
 
 **showrunner** is the person on a set who holds the brief and makes everyone follow it. This repo puts that role in front of the agent and makes it impossible to skip.
 
-<p align="center">
-  <img src="docs/media/before-after.gif" width="960" alt="Left: the same scene with default AI habits. Right: the showrunner version." />
-</p>
-<p align="center"><sub>Same brief, same scene. Left is what an agent produces unguided. Right is what it produces inside this repo.</sub></p>
 
 ## How it works
 
 1. **The brief gate.** `CLAUDE.md` forbids writing any video code until a brief exists in the [template format](docs/VIDEO_BRIEF_TEMPLATE.md): canvas, visual system, asset list, architecture, and every scene as timed beats with exact on-screen text. If you ask for a video without one, the agent hands you the template instead. `/brief` fills it in interactively.
 2. **The asset rule.** No logo is ever drawn by hand. Every mark is an official SVG fetched from its source into `public/assets/` via `assets.json`, verified on a contact sheet, and reported back before a single scene is built. `/assets` runs this batch.
-3. **One motion grammar.** `src/theme.ts` owns every color, font, spacing value, and spring. Elements enter with a 12px rise on a damping-200 spring, scale from 0.98 to 1.0, and leave with a 6-frame fade. Nothing bounces. Nothing rotates in. Holds are at least 20 frames. Deviations must be named in the brief as sanctioned exceptions.
+3. **One motion grammar.** `src/theme.ts` owns every color, font, spacing value, and spring. The canvas is an animated gradient wash with a particle field; panels are glass; active elements glow and breathe; connectors carry travelling pulses. Entrances rise with a slight overshoot, exits are quick fades, and nothing on screen ever sits fully still. Deviations must be named in the brief as sanctioned exceptions.
 4. **Composable scenes.** Scenes are built from `SceneWrapper`, `Headline`, `MonoLabel`, `LogoBadge`, `CodeBlock`, `StatCounter`, plus load-bearing components the brief names. Anything two scenes share becomes a component.
 5. **Verification before "done".** The agent renders one still per beat through a single bundle, reviews them, fixes what is off, then renders the MP4 and pushes.
 

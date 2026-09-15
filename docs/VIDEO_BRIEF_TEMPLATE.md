@@ -10,13 +10,15 @@
 - Voiceover: <attached script | none>. If attached, every beat below must cite the VO phrase it syncs to.
 
 ## 1. VISUAL SYSTEM — apply to every scene, no exceptions — REQUIRED
-- Background: <e.g. pure black #000000. No gradients, no vignettes, no noise unless explicitly requested.>
-- Typography: <UI/headline font + weights> for UI/headlines, <mono font> for code/technical labels. <primary text color> primary, <secondary color> secondary.
-- Accent: one accent color per project: #______
-- Layout: <e.g. generous negative space; content lives in the center 80% safe zone; never crowd edges.>
-- Motion language: <entrance: e.g. opacity 0→1 plus a 12px rise, spring({fps, frame, config: {damping: 200}}). No bounce, no overshoot, no rotation-based entrances.> <exits: e.g. quick opacity fades, 6–8 frames.> <stagger: e.g. 3–5 frames between siblings.>
-- Emphasis: <e.g. scale 0.98→1.0 on entry, never larger. Highlights use the accent or a 1px border glow, not size changes.>
-- Timing: <e.g. unhurried; hold finished compositions ≥20 frames before transitioning.>
+Default is the showrunner kinetic system in `src/theme.ts`. State what, if anything, changes.
+- Canvas: animated dark gradient wash + drifting dot grid + particle field (`SceneWrapper`). Never flat, never static.
+- Palette: deep blue #336791 (structure) · sky #5FA8FF (active accent) · amber #F59E0B (single warm highlight). Text white / #B8C4D6. Change: <hex set, or "default">
+- Typography: Inter 500–800 for UI/headlines (kinetic word-by-word entrances), JetBrains Mono for code/labels. Hero 112 · headline 76 · stat 168.
+- Surfaces: glass panels with luminous 1px borders and light sweeps. No opaque black boxes.
+- Motion: entrances rise 24px, scale 0.92→1, slight overshoot (damping 14). Ambient layer REQUIRED on every hold: drift, breathing glow, flowing connectors, shimmer. Exits: 8-frame fade + scale-down; the canvas never fades.
+- Density: fill the frame in layers (background → midground → foreground). Stagger siblings 3 frames.
+- Emphasis: amber + glow for the one thing to look at. Scale pops are allowed on stamps/counters (`springs.pop`).
+- Timing: <unhurried | brisk>. Holds ≥ 20 frames, but alive — never frozen.
 
 ## 2. ASSET RULES — REQUIRED
 - NEVER recreate brand logos, product icons, or UI screenshots with HTML/CSS/JSX shapes or hand-written SVG paths. Approximations are unacceptable.
@@ -37,7 +39,7 @@ Download these to `public/assets/` and confirm each renders on the canvas backgr
 
 ## 3. ARCHITECTURE — REQUIRED
 - One shared `src/theme.ts` exporting colors, fonts, spacing, and spring configs. All components import from it.
-- Reusable components in `src/components/`: `<SceneWrapper>`, `<Headline>`, `<MonoLabel>`, `<LogoBadge>`, `<CodeBlock>`, `<StatCounter>` plus any load-bearing components this brief names. Build scenes by composing these, not one-off JSX.
+- Reusable components in `src/components/`: `<SceneWrapper>`, `<Headline>`, `<MonoLabel>`, `<LogoBadge>`, `<CodeBlock>`, `<StatCounter>`, ambient `<Halo>` / `<FlowLine>` / `<LightSweep>`, plus any load-bearing components this brief names. Build scenes by composing these, not one-off JSX.
 - Each scene is its own file in `src/scenes/`, sequenced in a composition with `<Series>` and registered in `Root.tsx`.
 - Name any component that must be shared across scenes (e.g. a diagram that later scenes populate) and say which scenes depend on it.
 

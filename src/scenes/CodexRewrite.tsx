@@ -2,7 +2,7 @@ import React from 'react';
 import { AbsoluteFill, Img, staticFile, useCurrentFrame, useVideoConfig } from 'remotion';
 import { ArchDiagram, SceneWrapper, SlotBadge } from '../components';
 import { afterScene2 } from './diagramState';
-import { brand, colors, enter, fonts, itp, radius, slowSpring } from '../theme';
+import { brand, breathe, colors, enter, fonts, glow, itp, palette, radius, slowSpring } from '../theme';
 
 export const CODEX_REWRITE_DURATION = 330;
 
@@ -24,7 +24,8 @@ export const CodexRewrite: React.FC = () => {
   const badgeSwap = itp(frame, DRAIN_AT, DRAIN_AT + 20);
   const labelIn = enter(frame, fps, DRAIN_AT);
   const groupOut = itp(frame, BAR_OUT, BAR_OUT + 8, 1, 0);
-  const diagramOpacity = frame < BAR_OUT ? itp(frame, 0, 8, 1, 0.15) : itp(frame, BAR_OUT, BAR_OUT + 10, 0.15, 1);
+  const diagramOpacity = frame < BAR_OUT ? itp(frame, 0, 8, 1, 0.28) : itp(frame, BAR_OUT, BAR_OUT + 10, 0.28, 1);
+  const br = breathe(frame, 70, 0.6, 1);
 
   const agent = frame >= DOCK_AT - 2 ? <SlotBadge src="assets/rust.svg" delay={DOCK_AT} /> : undefined;
 
@@ -48,13 +49,16 @@ export const CodexRewrite: React.FC = () => {
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
               <Img src={staticFile('assets/github.svg')} style={{ width: 26, height: 26, objectFit: 'contain' }} />
-              <span style={{ fontFamily: fonts.mono, fontSize: 20, color: colors.zinc400 }}>openai/codex</span>
+              <span style={{ fontFamily: fonts.mono, fontSize: 24, color: colors.text }}>openai/codex</span>
             </div>
             <span
               style={{
-                fontFamily: fonts.mono,
-                fontSize: 20,
-                color: colors.text,
+                fontFamily: fonts.ui,
+                fontWeight: 800,
+                fontSize: 64,
+                letterSpacing: -2,
+                color: palette.amber,
+                filter: `drop-shadow(0 0 ${16 * br}px rgba(245,158,11,0.7))`,
                 fontVariantNumeric: 'tabular-nums',
                 opacity: labelIn.opacity,
                 transform: `translateY(${labelIn.translateY}px)`,
@@ -74,28 +78,29 @@ export const CodexRewrite: React.FC = () => {
               transform: `translateY(${bar.translateY}px) scale(${bar.scale})`,
             }}
           >
-            <div style={{ position: 'relative', width: 56, height: 56 }}>
+            <div style={{ position: 'relative', width: 72, height: 72 }}>
               <Img
                 src={staticFile('assets/typescript.svg')}
-                style={{ position: 'absolute', inset: 0, width: 56, height: 56, objectFit: 'contain', opacity: 1 - badgeSwap }}
+                style={{ position: 'absolute', inset: 0, width: 72, height: 72, objectFit: 'contain', opacity: 1 - badgeSwap, filter: `drop-shadow(0 0 14px ${brand.typescript}aa)` }}
               />
               <Img
                 src={staticFile('assets/rust.svg')}
-                style={{ position: 'absolute', inset: 0, width: 56, height: 56, objectFit: 'contain', opacity: badgeSwap }}
+                style={{ position: 'absolute', inset: 0, width: 72, height: 72, objectFit: 'contain', opacity: badgeSwap, filter: `drop-shadow(0 0 14px ${brand.rust}aa)` }}
               />
             </div>
             <div
               style={{
                 flex: 1,
-                height: 12,
+                height: 22,
                 borderRadius: radius.pill,
                 overflow: 'hidden',
                 display: 'flex',
-                backgroundColor: colors.zinc800,
+                backgroundColor: 'rgba(5,8,16,0.6)',
+                boxShadow: `${glow(rustFrac > 0.5 ? brand.rust : brand.typescript, 0.8 * br, 40)}, inset 0 1px 0 rgba(255,255,255,0.08)`,
               }}
             >
-              <div style={{ width: `${rustFrac * 100}%`, backgroundColor: brand.rust }} />
-              <div style={{ flex: 1, backgroundColor: brand.typescript }} />
+              <div style={{ width: `${rustFrac * 100}%`, background: `linear-gradient(90deg, ${brand.rust}, #f3c9a3)` }} />
+              <div style={{ flex: 1, background: `linear-gradient(90deg, ${brand.typescript}, #6ea8ff)` }} />
             </div>
           </div>
         </div>

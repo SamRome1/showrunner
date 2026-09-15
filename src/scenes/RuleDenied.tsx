@@ -1,7 +1,7 @@
 import React from 'react';
 import { AbsoluteFill, interpolate, useCurrentFrame } from 'remotion';
 import { SceneWrapper } from '../components';
-import { brand, colors, fonts, itp, typeOut } from '../theme';
+import { brand, breathe, colors, fonts, itp, typeOut } from '../theme';
 
 export const RULE_DENIED_DURATION = 165;
 const LINE = 'CREATE TABLE users_v2 (';
@@ -19,11 +19,12 @@ export const RuleDenied: React.FC = () => {
   });
   const stampOpacity = itp(frame, STAMP_AT, STAMP_AT + 2);
   const strike = itp(frame, STAMP_AT, STAMP_AT + 12);
+  const br = breathe(frame, 50, 0.6, 1);
 
   return (
-    <SceneWrapper justify="center">
+    <SceneWrapper halo justify="center">
       <div style={{ position: 'relative', display: 'inline-block' }}>
-        <div style={{ fontFamily: fonts.mono, fontSize: 40, color: colors.text, whiteSpace: 'pre' }}>
+        <div style={{ fontFamily: fonts.mono, fontSize: 52, color: colors.text, whiteSpace: 'pre', filter: 'drop-shadow(0 0 16px rgba(95,168,255,0.35))' }}>
           {text}
           <span style={{ opacity: caretOn ? 1 : 0, color: colors.zinc400 }}>▏</span>
         </div>
@@ -47,10 +48,12 @@ export const RuleDenied: React.FC = () => {
               style={{
                 fontFamily: fonts.ui,
                 fontWeight: 700,
-                fontSize: 64,
-                letterSpacing: 4,
+                fontSize: 84,
+                letterSpacing: 5,
                 color: brand.denied,
-                border: `1px solid ${brand.denied}`,
+                border: `2px solid ${brand.denied}`,
+                boxShadow: `0 0 ${30 * br}px rgba(239,68,68,0.55), inset 0 0 30px rgba(239,68,68,0.15)`,
+                filter: `drop-shadow(0 0 ${14 * br}px rgba(239,68,68,0.8))`,
                 borderRadius: 8,
                 padding: '6px 28px',
                 lineHeight: 1,

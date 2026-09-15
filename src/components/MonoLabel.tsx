@@ -1,39 +1,40 @@
 import React from 'react';
 import { useCurrentFrame, useVideoConfig } from 'remotion';
-import { colors, enter, radius, type } from '../theme';
+import { breathe, colors, enter, glow, palette, radius, type } from '../theme';
 
 type Props = {
   children: React.ReactNode;
   delay?: number;
-  /** Render as a bordered pill instead of bare text. */
   pill?: boolean;
-  /** Use the accent color for text (and border, when pill). */
   accent?: boolean;
-  /** Show a small accent dot before the label. */
+  /** Amber variant for highlight moments. */
+  warm?: boolean;
   dot?: boolean;
   uppercase?: boolean;
   size?: number;
-  /** false = already on screen; render settled with no entrance. */
   animate?: boolean;
   style?: React.CSSProperties;
 };
 
-/** JetBrains Mono technical label / tag. */
+/** JetBrains Mono label. Pills glow and breathe. */
 export const MonoLabel: React.FC<Props> = ({
   children,
   delay = 0,
   pill = false,
   accent = false,
+  warm = false,
   dot = false,
   uppercase = true,
   size = type.monoLabel.fontSize,
-  style,
   animate = true,
+  style,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const e = animate ? enter(frame, fps, delay) : { opacity: 1, translateY: 0, scale: 1, progress: 1 };
-  const color = accent ? colors.accent : colors.textSecondary;
+  const e = animate ? enter(frame, fps, delay) : { opacity: 1, translateY: 0, scale: 1 };
+  const hue = warm ? palette.amber : palette.sky;
+  const color = warm || accent ? hue : colors.textSecondary;
+  const br = breathe(frame, 100, 0.5, 1, delay);
 
   return (
     <div
@@ -48,8 +49,10 @@ export const MonoLabel: React.FC<Props> = ({
         ...(pill
           ? {
               padding: '10px 18px',
-              border: `1px solid ${accent ? colors.accentBorder : colors.border}`,
+              border: `1px solid ${warm || accent ? `${hue}${Math.round(0x40 + 0x60 * br).toString(16)}` : colors.border}`,
               borderRadius: radius.pill,
+              backgroundColor: colors.surface,
+              boxShadow: warm || accent ? glow(hue, 0.5 * br, 24) : undefined,
             }
           : null),
         opacity: e.opacity,
@@ -59,15 +62,7 @@ export const MonoLabel: React.FC<Props> = ({
       }}
     >
       {dot ? (
-        <span
-          style={{
-            width: 8,
-            height: 8,
-            borderRadius: radius.pill,
-            backgroundColor: colors.accent,
-            flexShrink: 0,
-          }}
-        />
+        <span style={{ width: 8, height: 8, borderRadius: radius.pill, backgroundColor: hue, boxShadow: glow(hue, br, 12), flexShrink: 0 }} />
       ) : null}
       {children}
     </div>

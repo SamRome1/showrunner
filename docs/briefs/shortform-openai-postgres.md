@@ -4,12 +4,13 @@ Composition: `ShortForm` (`src/Compositions/ShortForm.tsx`), 1080x1080, 30fps, 2
 Placement: upper half of a vertical short. Accent: Postgres blue #336791 (the brief's [ACCENT_HEX] placeholder was unfilled; blue was chosen because Scenes 7 and 10 call it out).
 
 ## 1. VISUAL SYSTEM — apply to every scene, no exceptions
-- Background: pure black (#000000). No gradients, no vignettes, no noise unless explicitly requested.
-- Typography: Inter for UI/headlines (weights 500–700), JetBrains Mono for code/technical labels. White (#FFFFFF) primary text, #A1A1AA (zinc-400) secondary. One accent color per project.
-- Layout: generous negative space. Content lives in the center 80% safe zone. Never crowd edges.
-- Motion language: elements enter with opacity 0→1 plus a subtle 12px rise, using spring({fps, frame, config: {damping: 200}}). No bounce, no overshoot, no rotation-based entrances. Exits are quick opacity fades (6–8 frames). Stagger sibling elements by 3–5 frames.
-- Emphasis: scale from 0.98→1.0 on entry, never larger. Highlight moments use the accent color or a 1px border glow, not size changes.
-- Timing: scenes are unhurried. Hold finished compositions for at least 20 frames before transitioning.
+Revised 2026-09-15 to the showrunner kinetic system (the original brief specified pure black and static holds; the owner asked for density, constant motion, and a color theme).
+- Canvas: animated deep-blue gradient wash, drifting dot grid, particle field. Halo rings behind type-only scenes.
+- Palette: deep #336791 · sky #5FA8FF · amber #F59E0B (highlight moments: "95% Rust", the billion, "1 SEV0", the empty db slot, exiled workloads).
+- Typography: Inter 700–800 kinetic headlines, JetBrains Mono labels/code. Large.
+- Surfaces: glass panels (browser window, code panel, citation card, rule rows, "shards: 1"). Live connectors with travelling pulses in ArchDiagram and ReplicaTopology.
+- Motion: slight-overshoot entrances, breathing glow, drift on every idle element, rolling shimmer across the replica fan, expanding pulse rings when the elephant lands.
+- Sanctioned exception: the DENIED stamp overshoots 1.15→1.0 with a red glow.
 
 ## 2. ASSET RULES
 As in `docs/VIDEO_BRIEF_TEMPLATE.md`.

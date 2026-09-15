@@ -1,7 +1,7 @@
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from 'remotion';
 import { ArchDiagram, SceneWrapper, SlotBadge, SlotRow } from '../components';
-import { colors, enter, fonts, itp, radius, typeOut } from '../theme';
+import { colors, enter, fonts, glass, glow, itp, palette, radius, typeOut } from '../theme';
 
 export const FRONTEND_REVEAL_DURATION = 285;
 
@@ -37,7 +37,7 @@ export const FrontendReveal: React.FC = () => {
 
   const win = enter(frame, fps, 0);
   const winOut = itp(frame, WINDOW_OUT, WINDOW_OUT + 8, 1, 0);
-  const diagramOpacity = frame < WINDOW_OUT ? itp(frame, 0, 8, 1, 0.15) : itp(frame, WINDOW_OUT, WINDOW_OUT + 10, 0.15, 1);
+  const diagramOpacity = frame < WINDOW_OUT ? itp(frame, 0, 8, 1, 0.28) : itp(frame, WINDOW_OUT, WINDOW_OUT + 10, 0.28, 1);
   const url = typeOut(URL, frame, 10, 3);
   const caretOn = frame < SOURCE_AT && Math.floor(frame / 15) % 2 === 0;
   const sourceIn = itp(frame, SOURCE_AT, SOURCE_AT + 6);
@@ -63,11 +63,11 @@ export const FrontendReveal: React.FC = () => {
         <AbsoluteFill style={{ alignItems: 'center', justifyContent: 'center' }}>
           <div
             style={{
-              width: 760,
-              height: 460,
-              border: `1px solid ${colors.zinc700}`,
-              borderRadius: radius.md,
-              backgroundColor: colors.bg,
+              width: 840,
+              height: 520,
+              ...glass(0.35),
+              borderRadius: radius.lg,
+              boxShadow: `${glow(palette.deep, 0.8, 60)}, 0 30px 80px rgba(0,0,0,0.5)`,
               overflow: 'hidden',
               display: 'flex',
               flexDirection: 'column',
@@ -77,8 +77,8 @@ export const FrontendReveal: React.FC = () => {
           >
             <div
               style={{
-                height: 52,
-                borderBottom: `1px solid ${colors.zinc700}`,
+                height: 56,
+                borderBottom: `1px solid ${colors.border}`,
                 display: 'flex',
                 alignItems: 'center',
                 padding: '0 16px',
@@ -87,20 +87,21 @@ export const FrontendReveal: React.FC = () => {
             >
               <div style={{ display: 'flex', gap: 6 }}>
                 {[0, 1, 2].map((i) => (
-                  <div key={i} style={{ width: 8, height: 8, borderRadius: 999, border: `1px solid ${colors.zinc700}` }} />
+                  <div key={i} style={{ width: 10, height: 10, borderRadius: 999, backgroundColor: [palette.sky, palette.amber, colors.zinc600][i], opacity: 0.85 }} />
                 ))}
               </div>
               <div
                 style={{
                   flex: 1,
-                  height: 32,
-                  border: `1px solid ${colors.zinc700}`,
+                  height: 36,
+                  border: `1px solid ${colors.borderStrong}`,
                   borderRadius: radius.sm,
+                  backgroundColor: 'rgba(5,8,16,0.5)',
                   display: 'flex',
                   alignItems: 'center',
-                  padding: '0 12px',
+                  padding: '0 14px',
                   fontFamily: fonts.mono,
-                  fontSize: 16,
+                  fontSize: 18,
                   color: colors.text,
                 }}
               >
@@ -116,9 +117,9 @@ export const FrontendReveal: React.FC = () => {
                     key={i}
                     style={{
                       fontFamily: fonts.mono,
-                      fontSize: 14,
-                      lineHeight: '26px',
-                      color: colors.zinc600,
+                      fontSize: 15,
+                      lineHeight: '30px',
+                      color: colors.zinc500,
                       whiteSpace: 'pre',
                       opacity: li,
                     }}
@@ -130,8 +131,9 @@ export const FrontendReveal: React.FC = () => {
                         <span
                           key={j}
                           style={{
-                            color: `rgba(255,255,255,${0.32 + 0.68 * p})`,
-                            borderBottom: `1px solid rgba(255,255,255,${p})`,
+                            color: `rgba(245,158,11,${0.4 + 0.6 * p})`,
+                            borderBottom: `1px solid rgba(245,158,11,${p})`,
+                            textShadow: `0 0 ${12 * p}px rgba(245,158,11,0.7)`,
                             paddingBottom: 1,
                           }}
                         >

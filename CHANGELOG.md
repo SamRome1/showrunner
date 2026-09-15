@@ -4,7 +4,11 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+### Changed
+- Visual system v2 (kinetic): animated gradient canvas, dot grid, particles, glass surfaces, glow, flowing connectors, slight-overshoot entrances, ambient motion on every hold. Brand-anchored palette (deep blue, sky, amber). All four gallery videos re-rendered.
+
 ### Added
+- Ambient components: `GradientWash`, `Particles`, `DotGrid`, `Halo`, `FlowLine`, `LightSweep`.
 - Brief gate in `CLAUDE.md` with the brief template and `/brief`, `/assets` skills.
 - Shared `theme.ts` and nine composable components.
 - `ShortForm` example: OpenAI runs on one Postgres, 12 scenes, with brief and render.

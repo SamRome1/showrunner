@@ -1,7 +1,7 @@
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from 'remotion';
 import { CheckGlyph, CrossGlyph, CylinderGlyph, ReplicaTopology, SceneWrapper, TOPO_H, TOPO_W } from '../components';
-import { brand, colors, enter, fonts, itp, lerp, radius, slowSpring } from '../theme';
+import { brand, breathe, colors, enter, fonts, glass, glow, itp, lerp, palette, radius, slowSpring } from '../theme';
 
 export const RULES_EXILE_DURATION = 465;
 
@@ -37,6 +37,7 @@ export const RulesAndExile: React.FC = () => {
   const { fps } = useVideoConfig();
 
   const rulesOut = itp(frame, PHASE2, PHASE2 + 10, 1, 0);
+  const br = breathe(frame, 80, 0.5, 1);
   const topoIn = itp(frame, PHASE2 + 8, PHASE2 + 20);
   const circle = slowSpring(frame, fps, CIRCLE_AT, CIRCLE_LEN);
 
@@ -74,7 +75,7 @@ export const RulesAndExile: React.FC = () => {
     <SceneWrapper>
       {/* PHASE 1 — rules */}
       <AbsoluteFill style={{ alignItems: 'center', justifyContent: 'center', opacity: rulesOut }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 40, width: 700 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 26, width: 860 }}>
           {RULES.map((r) => {
             const e = enter(frame, fps, r.at);
             const g = enter(frame, fps, r.at + 10).progress;
@@ -86,15 +87,20 @@ export const RulesAndExile: React.FC = () => {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   fontFamily: fonts.mono,
-                  fontSize: 28,
+                  fontSize: 32,
                   color: colors.text,
+                  ...glass(r.ok ? 0.5 * br : 0),
+                  borderColor: r.ok ? undefined : `rgba(239,68,68,${0.35 + 0.3 * br})`,
+                  boxShadow: r.ok ? undefined : `${glow('#EF4444', 0.6 * br, 30)}, inset 0 1px 0 rgba(255,255,255,0.06)`,
+                  borderRadius: radius.md,
+                  padding: '24px 32px',
                   opacity: e.opacity,
                   transform: `translateY(${e.translateY}px) scale(${e.scale})`,
                   transformOrigin: '0% 50%',
                 }}
               >
                 <span>{r.text}</span>
-                {r.ok ? <CheckGlyph progress={g} size={32} /> : <CrossGlyph progress={g} size={32} color={brand.denied} />}
+                {r.ok ? <CheckGlyph progress={g} size={40} color={palette.amber} /> : <CrossGlyph progress={g} size={40} color={brand.denied} />}
               </div>
             );
           })}
@@ -134,9 +140,10 @@ export const RulesAndExile: React.FC = () => {
                 cy={CIRCLE.cy}
                 r={CIRCLE.r}
                 fill="none"
-                stroke={`rgba(255,255,255,${0.35 + flash})`}
-                strokeWidth={1}
+                stroke={`rgba(95,168,255,${0.55 + flash})`}
+                strokeWidth={1.5}
                 strokeDasharray="6 8"
+                style={{ filter: `drop-shadow(0 0 ${10 + 30 * flash}px rgba(95,168,255,0.8))` }}
               />
             </svg>
           </div>
@@ -154,9 +161,10 @@ export const RulesAndExile: React.FC = () => {
                   top: p.y - BOX.h / 2,
                   width: BOX.w,
                   height: BOX.h,
-                  border: `1px solid ${colors.zinc400}`,
+                  ...glass(0.6),
+                  borderColor: `rgba(245,158,11,${0.5 + 0.4 * br})`,
+                  boxShadow: `${glow(palette.amber, 0.7 * br, 26)}, inset 0 1px 0 rgba(255,255,255,0.06)`,
                   borderRadius: radius.sm,
-                  backgroundColor: colors.bg,
                   opacity: vis * p.o,
                 }}
               />
@@ -165,7 +173,7 @@ export const RulesAndExile: React.FC = () => {
 
           {/* exile database */}
           <div style={{ position: 'absolute', left: EXILE.x - 32, top: EXILE.y - 40 }}>
-            <CylinderGlyph progress={exileDb} size={64} />
+            <CylinderGlyph progress={exileDb} size={72} color={palette.amber} />
           </div>
         </AbsoluteFill>
       ) : null}
