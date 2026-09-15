@@ -55,11 +55,11 @@ Load-bearing: Terminal.
 ### Scene 4 — AssetRule (690–990f, 10s)
 Beat A (0–40f): MonoLabel pill at top-left of the safe zone: `OFFICIAL SOURCES ONLY`.
 Beat B (8–120f): CodeBlock (filename `assets.json`, 4 lines, stagger 6f) showing three manifest entries:
-  `{ "file": "openai.svg",     "url": "https://svgl.app/library/openai_dark.svg" },`
-  `{ "file": "postgresql.svg", "url": "https://svgl.app/library/postgresql.svg" },`
-  `{ "file": "github.svg",     "url": "https://svgl.app/library/github_dark.svg" },`
+  `{ "file": "openai.svg",     "url": "svgl.app/library/openai_dark.svg" },`
+  `{ "file": "postgresql.svg", "url": "svgl.app/library/postgresql.svg" },`
+  `{ "file": "github.svg",     "url": "svgl.app/library/github_dark.svg" },`
   `// never drawn by hand`
-Beat C (120–220f): two rows of five LogoBadge tiles (size 108, bare marks in bordered tiles) dock in beneath, 4f apart in reading order: openai, react, nextjs, typescript, rust / python, kubernetes, azure, postgresql, github.
+Beat C (120–220f): two rows of five LogoBadge tiles (size 140, bare marks in bordered tiles) dock in beneath, 4f apart in reading order: openai, react, nextjs, typescript, rust / python, kubernetes, azure, postgresql, github.
 Beat D (220–300f): hold.
 On-screen text: the pill and the code lines only.
 
@@ -77,7 +77,7 @@ Beat C (110–180f): hold.
 On-screen text: `6 / 6`, `STILLS REVIEWED`.
 
 ### Scene 7 — Closer (1410–1500f, 3s) — ends on a HARD CUT
-Beat A (0–70f): Terminal rises in; input types (2f/char): `git clone github.com/SamRome1/showrunner`
+Beat A (0–70f): Terminal rises in; input types (1.5f/char, done by f68): `git clone github.com/SamRome1/showrunner`
 Beat B (70–90f): hold, then cut to black on the final frame. No fade, no outro.
 On-screen text: the clone line only.
 Sanctioned exceptions: hard cut ending (no exit fade).
