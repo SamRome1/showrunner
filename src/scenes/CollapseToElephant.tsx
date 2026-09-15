@@ -7,7 +7,8 @@ import { breathe, CANVAS, enter, itp, palette, slowSpring } from '../theme';
 export const COLLAPSE_DURATION = 210;
 const COLLAPSE_AT = 30;
 const COLLAPSE_LEN = 60;
-const ELEPHANT_AT = 90;
+const ELEPHANT_AT = 82;
+const GATHER_AT = 48;
 export const ELEPHANT_HERO = 260;
 
 /** The diagram is swallowed into the db slot, which drifts to canvas center; the elephant appears there. */
@@ -18,9 +19,24 @@ export const CollapseToElephant: React.FC = () => {
   const shift = (CANVAS.height / 2 - ARCH_NODES.db.y) * c; // db slot → center
   const el = enter(frame, fps, ELEPHANT_AT);
   const bloom = breathe(frame, 80, 0.6, 1);
+  // energy gathers at the convergence point while the diagram is swallowed
+  const gather = itp(frame, GATHER_AT, ELEPHANT_AT + 6);
+  const gatherOut = itp(frame, ELEPHANT_AT + 6, ELEPHANT_AT + 40, 1, 0.35);
 
   return (
     <SceneWrapper exit={false} justify="center">
+      {gather > 0 ? (
+        <div style={{ position: 'absolute', left: 540 - 300, top: 540 - 300, width: 600, height: 600, pointerEvents: 'none' }}>
+          <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: `radial-gradient(circle, ${palette.sky}cc 0%, ${palette.deep}88 22%, transparent 65%)`, filter: 'blur(26px)', opacity: gather * gatherOut * bloom, transform: `scale(${0.3 + gather * 0.9})` }} />
+          {Array.from({ length: 14 }).map((_, i) => {
+            const a = (i / 14) * Math.PI * 2 + frame * 0.02;
+            const r = 340 * (1 - gather) + 40 + Math.sin(frame / 7 + i) * 8;
+            return (
+              <div key={i} style={{ position: 'absolute', left: 300 + Math.cos(a) * r - 3, top: 300 + Math.sin(a) * r - 3, width: 6, height: 6, borderRadius: '50%', backgroundColor: i % 4 === 0 ? palette.amber : palette.sky, boxShadow: `0 0 12px ${i % 4 === 0 ? palette.amber : palette.sky}`, opacity: gather * gatherOut }} />
+            );
+          })}
+        </div>
+      ) : null}
       {c < 0.999 ? (
         <AbsoluteFill style={{ transform: `translateY(${shift}px)` }}>
           <ArchDiagram slots={afterScene4} collapse={c} />
