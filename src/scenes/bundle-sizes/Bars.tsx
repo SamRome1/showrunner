@@ -5,10 +5,12 @@ import { FRAMEWORKS, MAX_GZIP, toKb } from './data';
 export const BARS_DURATION = 600;
 export const BAR_ROWS = FRAMEWORKS.map((f) => ({ id: f.id, label: f.name, logo: f.logo, value: f.gzipBytes, display: toKb(f.gzipBytes) }));
 
-/** Rows land smallest → largest, one every 100 frames; the last bar is the payoff. */
+/** Rows land smallest → largest, one every 100 frames; the last (amber) bar is the payoff. */
 export const Bars: React.FC = () => (
-  <SceneWrapper justify="start" gap={36}>
-    <MonoLabel delay={0}>min + gzip · what a hello world imports</MonoLabel>
+  <SceneWrapper justify="start" gap={28} align="center">
+    <MonoLabel delay={0} pill accent dot size={24}>
+      min + gzip · what a hello world imports
+    </MonoLabel>
     <SizeBar rows={BAR_ROWS} max={MAX_GZIP} startAt={10} rowDelay={100} growFrames={50} />
   </SceneWrapper>
 );
