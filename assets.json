@@ -47,6 +47,11 @@
       "note": "white mark"
     },
     {
+      "file": "anthropic.svg",
+      "url": "https://svgl.app/library/anthropic_white.svg",
+      "note": "white mark for dark backgrounds"
+    },
+    {
       "file": "vue.svg",
       "url": "https://svgl.app/library/vue.svg"
     },

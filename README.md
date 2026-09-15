@@ -23,6 +23,11 @@ Ask an AI agent for a video and you get one: bouncing text, gradients, a hand-dr
 
 **showrunner** is the person on a set who holds the brief and makes everyone follow it. This repo puts that role in front of the agent and makes it impossible to skip.
 
+<p align="center">
+  <img src="docs/media/before-after.gif" width="960" alt="Left: the same scene with default AI habits. Right: the showrunner version." />
+</p>
+<p align="center"><sub>Same brief, same scene. Left is what an agent produces unguided. Right is what it produces inside this repo.</sub></p>
+
 ## How it works
 
 1. **The brief gate.** `CLAUDE.md` forbids writing any video code until a brief exists in the [template format](docs/VIDEO_BRIEF_TEMPLATE.md): canvas, visual system, asset list, architecture, and every scene as timed beats with exact on-screen text. If you ask for a video without one, the agent hands you the template instead. `/brief` fills it in interactively.
