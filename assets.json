@@ -50,6 +50,22 @@
       "file": "anthropic.svg",
       "url": "https://svgl.app/library/anthropic_white.svg",
       "note": "white mark for dark backgrounds"
+    },
+    {
+      "file": "vue.svg",
+      "url": "https://svgl.app/library/vue.svg"
+    },
+    {
+      "file": "svelte.svg",
+      "url": "https://svgl.app/library/svelte.svg"
+    },
+    {
+      "file": "solidjs.svg",
+      "url": "https://svgl.app/library/solidjs.svg"
+    },
+    {
+      "file": "preact.svg",
+      "url": "https://svgl.app/library/preact.svg"
     }
   ]
 }
