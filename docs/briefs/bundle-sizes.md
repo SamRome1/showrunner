@@ -24,7 +24,14 @@ Largest ÷ smallest = 61,227 / 4,851 = 12.6×.
 Why bundlejs and not bundlephobia: bundlephobia measures a package's default entry only. For react-dom@19 that entry excludes `react-dom/client` (the reconciler), which would understate React by ~50 kB. bundlejs accepts subpath entries, so every framework is measured the same way. Numbers are the full runtime with every export; a real app tree-shakes some of it. The caveat scene says so.
 
 ## 1. VISUAL SYSTEM — apply to every scene, no exceptions
-Repo defaults from `src/theme.ts`: pure black, Inter 500–700 / JetBrains Mono, white primary / zinc-400 secondary, accent #336791, center-80% safe zone, damping-200 rise entrances, 6–8 frame exits, ≥20 frame holds. Bars are accent-colored on a zinc track. **No per-framework brand colors** — the official logos carry brand color, the bars stay neutral so the eye compares length, not hue.
+Revised 2026-09-15 to the showrunner kinetic system (the original brief specified pure black, static holds, and a flat accent bar; the owner asked for density, constant motion, and a color theme).
+- Canvas: animated deep-blue gradient wash, drifting dot grid, particle field. Halo rings behind HelloWorld, Scale, Caveat, Source.
+- Palette: deep #336791 · sky #5FA8FF · amber #F59E0B. Amber is the single highlight per frame: the React bar (largest) and its value, the "12.6×" ratio, the SOURCE label, the emphasised phrase in the caveat.
+- Typography: Inter 700–800 kinetic headlines, JetBrains Mono labels/code. Values 48px tabular; ratio 220px.
+- Surfaces: glass tracks and logo tiles, glass code panel, glass caveat and citation cards with light sweeps. No opaque black boxes.
+- Bars: deep→sky gradient fill with a glowing white leading edge and a travelling highlight; the payoff row is deep→amber. **Still no per-framework brand colors** — logos carry brand, bar hue only encodes "largest".
+- Motion: slight-overshoot entrances, row drift + breathing glow on hold, expanding amber rings when the ratio lands.
+- Sanctioned exceptions: none.
 
 ## 2. ASSET RULES
 As in `docs/VIDEO_BRIEF_TEMPLATE.md`.
