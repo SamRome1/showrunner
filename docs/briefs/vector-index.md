@@ -9,13 +9,13 @@ Composition: `VectorIndex` (`src/compositions/VectorIndex.tsx`). Gallery example
 - Voiceover: none. Beats are paced to be read, not spoken over.
 
 ## 1. VISUAL SYSTEM — apply to every scene, no exceptions
-- Background: pure black (#000000). No gradients, no vignettes, no noise.
-- Typography: Inter for headlines (700), JetBrains Mono for labels, counters, and the closing line. White primary, #A1A1AA secondary.
-- Accent: #336791 (shared across the gallery). Used only for the query point, the search path, the found node, and rules.
-- Layout: center 80% safe zone. Text block pinned to the top of the safe zone; diagram fills the lower ~two-thirds.
-- Motion language: standard `enter()` (12px rise, 0.98→1.0, damping 200). Point clouds and graph layers reveal with `slowSpring` over 60–70 frames. Exits are `SceneWrapper` fades; scenes that hand the diagram to the next scene use `exit={false}`.
-- Emphasis: accent color and 1.5px rings. Never size changes.
-- Timing: every scene holds its finished state ≥40 frames.
+Revised 2026-09-15 to the showrunner kinetic system (the original brief specified pure black, a single #336791 accent, and static holds; the owner asked for density, constant motion, and a color theme).
+- Canvas: animated deep-blue gradient wash, drifting dot grid, particle field (`SceneWrapper`). Halo rings behind the type-only scenes (TheIdea, TradeOff, Closer).
+- Palette: deep #336791 (panel fills, faint edges) · sky #5FA8FF (points, nodes, labels, headline gradient) · amber #F59E0B — the single highlight: the query point, comparison counter, hop counter, the search path, visited nodes, the found node, recall/latency numerals.
+- Typography: Inter 800 kinetic word-by-word headlines with a sky→white gradient; JetBrains Mono for pills, layer labels, counters, and the closing line.
+- Surfaces: layer panels are glass (translucent fill, luminous border that brightens on the active layer, light sweep). Trade-off rows are glass with a sky→amber rule. No opaque boxes.
+- Motion: entrances rise 24px with a slight overshoot. Every point and node twinkles on its own period (`breathe` + `hash`); the field and each layer drift for parallax (upper layers more than the dense floor). Brute-force rays are sky with an amber, glowing head. The search path glows with a blurred afterglow and travelling pulses on completed hops; visited nodes bloom; the query marker pulses with a repeating expanding ring. Exits are 8-frame fades; the canvas never fades.
+- Sanctioned exceptions: none.
 
 ## 2. ASSET RULES
 As in `docs/VIDEO_BRIEF_TEMPLATE.md`.

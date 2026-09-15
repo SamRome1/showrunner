@@ -69,7 +69,16 @@ export const Headline: React.FC<Props> = ({
   if (kinetic && typeof children === 'string') {
     const words = children.split(' ');
     return (
-      <div style={{ ...base, display: 'flex', flexWrap: 'wrap', gap: '0 0.28em', justifyContent: align === 'center' ? 'center' : 'flex-start' }}>
+      <div
+        style={{
+          ...base,
+          ...(gradient ? { backgroundImage: undefined, WebkitBackgroundClip: undefined, backgroundClip: undefined, color: undefined } : null),
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '0 0.28em',
+          justifyContent: align === 'center' ? 'center' : 'flex-start',
+        }}
+      >
         {words.map((w, i) => {
           const we = animate ? enter(frame, fps, delay + i * timing.stagger) : settled;
           return (

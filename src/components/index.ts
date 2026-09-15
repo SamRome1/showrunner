@@ -1,6 +1,6 @@
 /** Barrel for the short-form motion system components. */
 export { SceneWrapper } from './SceneWrapper';
-export { Headline, Accent, Muted } from './Headline';
+export { Headline, Accent, Sky, Muted } from './Headline';
 export { MonoLabel } from './MonoLabel';
 export { LogoBadge } from './LogoBadge';
 export { CodeBlock } from './CodeBlock';
@@ -14,7 +14,7 @@ export { Terminal } from './Terminal';
 export type { TerminalLine } from './Terminal';
 export { SizeBar } from './SizeBar';
 export type { SizeBarRow } from './SizeBar';
-export { PointField } from './PointField';
+export { PointField, FieldDefs, QueryMarker } from './PointField';
 export type { Pt, Box } from './pointMath';
 export { GraphLayer } from './GraphLayer';
 export { GradientWash } from './GradientWash';
