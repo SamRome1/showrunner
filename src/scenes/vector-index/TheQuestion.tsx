@@ -1,7 +1,7 @@
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from 'remotion';
 import { Headline, MonoLabel, PointField, SceneWrapper } from '../../components';
-import { colors, slowSpring, timing } from '../../theme';
+import { slowSpring, timing } from '../../theme';
 import { COUNT, QUERY, SEED, index } from './hnsw';
 import { FIELD, TEXT_TOP } from './layout';
 import { makePoints } from '../../components/pointMath';
@@ -14,27 +14,22 @@ export const TheQuestion: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps, width, height } = useVideoConfig();
   const pts = makePoints(SEED, COUNT);
-  index(); // warm the index once so later scenes don't pay for it mid-render
+  index();
   const reveal = slowSpring(frame, fps, 10, 60);
   const qIn = slowSpring(frame, fps, QUERY_AT, 20);
-  const qx = FIELD.x + QUERY.x * FIELD.w;
-  const qy = FIELD.y + QUERY.y * FIELD.h;
 
   return (
     <SceneWrapper exit={false} align="start">
-      <div style={{ marginTop: TEXT_TOP, display: 'flex', flexDirection: 'column', gap: 24 }}>
-        <MonoLabel pill accent delay={0}>
+      <div style={{ marginTop: TEXT_TOP, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 24 }}>
+        <MonoLabel pill accent dot delay={0}>
           query
         </MonoLabel>
-        <Headline delay={timing.stagger} maxWidth={864}>
+        <Headline delay={timing.stagger} maxWidth={864} gradient>
           Which point is closest?
         </Headline>
       </div>
       <AbsoluteFill>
-        <PointField points={pts} box={FIELD} reveal={reveal} width={width} height={height}>
-          <circle cx={qx} cy={qy} r={7} fill={colors.accent} opacity={qIn} />
-          <circle cx={qx} cy={qy} r={16} fill="none" stroke={colors.accent} strokeWidth={1.5} opacity={qIn} />
-        </PointField>
+        <PointField points={pts} box={FIELD} reveal={reveal} width={width} height={height} query={qIn > 0.05 ? QUERY : undefined} />
       </AbsoluteFill>
     </SceneWrapper>
   );
