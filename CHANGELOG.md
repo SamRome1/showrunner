@@ -10,3 +10,7 @@ All notable changes to this project are documented here. The format follows [Kee
 - `ShortForm` example: OpenAI runs on one Postgres, 12 scenes, with brief and render.
 - Official-logo manifest with fetch-on-install; `AssetCheck` contact sheet.
 - `scripts/stills.mjs` per-beat verification; CI rendering one still per scene.
+- Gallery: `Release` (1:1 launch video), `BundleSizes` (16:9 data story from live bundlejs measurements), `VectorIndex` (9:16 zero-logo HNSW explainer), each with its brief.
+- Components: `Terminal`, `SizeBar`, `PointField`, `GraphLayer`.
+- Before/after contrast GIF and social preview image.
+- Issue and PR templates, code of conduct, roadmap issues.

@@ -48,16 +48,24 @@ npm run dev          # opens Remotion Studio with the example video
 Then open the folder in Claude Code and say what you want to make. You will get the brief template back. Fill it in, or run `/brief` and answer questions.
 
 ```bash
-npm run render                                  # full MP4 → out/ShortForm.mp4
+npm run render                                  # flagship MP4 → out/ShortForm.mp4
+npx remotion render VectorIndex out/VectorIndex.mp4   # any composition by id
 node scripts/stills.mjs ShortForm 60 305 1005   # one PNG per frame → out/stills/
 npm run assets:check                            # contact sheet of every logo on black
 ```
 
-## The example
+## Gallery
 
-`ShortForm` is a 90-second, 1080×1080 explainer about OpenAI running ChatGPT on a single unsharded Postgres primary, cited to Bohan Zhang's PGConf.dev 2025 talk. Twelve scenes, twelve files in `src/scenes/`, one [brief](docs/briefs/shortform-openai-postgres.md). Two components carry the story: `ArchDiagram` (a system diagram with named slots that scenes 1 through 5 populate and then collapse) and `ReplicaTopology` (one primary and 48 replicas, reused at half scale inside a boundary circle in scene 9).
+Four compositions, four briefs, three canvas formats. Every frame range, hold, and on-screen string in the code came from the brief next to it.
 
-Read the brief next to the scenes to see how tightly a good brief constrains the result. Every frame range, hold, and on-screen string in the code came from it.
+| | |
+|---|---|
+| <img src="docs/media/hero.gif" width="440" alt="ShortForm" /> | **ShortForm** · 1:1 · 90s<br/>OpenAI runs ChatGPT on one unsharded Postgres primary. Cited to Bohan Zhang, PGConf.dev 2025.<br/>[brief](docs/briefs/shortform-openai-postgres.md) · [mp4](docs/media/shortform-openai-postgres.mp4) · `src/scenes/` |
+| <img src="docs/media/release.gif" width="440" alt="Release" /> | **Release** · 1:1 · 50s<br/>The showrunner v0.1 launch video: the gate, the asset rule, the motion grammar, verification.<br/>[brief](docs/briefs/release.md) · [mp4](docs/media/release.mp4) · `src/scenes/release/` |
+| <img src="docs/media/bundle-sizes.gif" width="440" alt="BundleSizes" /> | **BundleSizes** · 16:9 · 54s<br/>Min+gzip runtime size of Preact, Solid, Svelte, Vue, and React from live bundlejs measurements. Official logos, one accent.<br/>[brief](docs/briefs/bundle-sizes.md) · [mp4](docs/media/bundle-sizes.mp4) · `src/scenes/bundle-sizes/` |
+| <img src="docs/media/vector-index.gif" width="248" alt="VectorIndex" /> | **VectorIndex** · 9:16 · 50s<br/>What an HNSW index does, with zero brand assets. The graph and the 8-hop search are computed at render time.<br/>[brief](docs/briefs/vector-index.md) · [mp4](docs/media/vector-index.mp4) · `src/scenes/vector-index/` |
+
+Two components carry the flagship: `ArchDiagram` (a system diagram with named slots that scenes populate and then collapse) and `ReplicaTopology` (one primary and 48 replicas, reused at half scale inside a boundary circle). The other examples added `Terminal`, `SizeBar`, `PointField`, and `GraphLayer` the same way: built once because a brief named them, then shared.
 
 ## What lives where
 
