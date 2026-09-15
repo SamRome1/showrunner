@@ -6,6 +6,7 @@ import { AssetCheck } from './AssetCheck';
 import { Release, RELEASE_DURATION } from './Release';
 import { BundleSizes, BUNDLE_SIZES_DURATION } from './BundleSizes';
 import { VectorIndex, VECTOR_INDEX_DURATION, VECTOR_INDEX_SIZE } from './VectorIndex';
+import { ProductLaunch, PRODUCT_LAUNCH_DURATION, PRODUCT_LAUNCH_SIZE } from './ProductLaunch';
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -44,6 +45,16 @@ export const RemotionRoot: React.FC = () => (
       fps={30}
       width={1920}
       height={1080}
+    />
+
+    {/* example: ProductLaunch */}
+    <Composition
+      id="ProductLaunch"
+      component={ProductLaunch}
+      durationInFrames={PRODUCT_LAUNCH_DURATION}
+      fps={CANVAS.fps}
+      width={PRODUCT_LAUNCH_SIZE.width}
+      height={PRODUCT_LAUNCH_SIZE.height}
     />
 
     {/* ---- tooling ---- */}
