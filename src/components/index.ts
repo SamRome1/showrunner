@@ -23,3 +23,4 @@ export { FlowLine } from './FlowLine';
 export { LightSweep } from './LightSweep';
 export { DotGrid } from './DotGrid';
 export { Halo } from './Halo';
+export { SearchMock } from './SearchMock';
