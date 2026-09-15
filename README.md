@@ -10,7 +10,14 @@
 </p>
 
 <p align="center">
-  <a href="docs/media/shortform-openai-postgres.mp4">Watch the full 90-second example</a> ·
+  <a href="https://github.com/SamRome1/showrunner/actions/workflows/ci.yml"><img src="https://github.com/SamRome1/showrunner/actions/workflows/ci.yml/badge.svg" alt="ci" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-5FA8FF" alt="MIT" /></a>
+  <img src="https://img.shields.io/badge/remotion-4.0-336791" alt="Remotion 4" />
+  <img src="https://img.shields.io/badge/works%20with-Claude%20Code%20%C2%B7%20Cursor%20%C2%B7%20Codex-F59E0B" alt="agents" />
+</p>
+
+<p align="center">
+  <a href="https://github.com/SamRome1/showrunner/releases/download/v0.1.0/shortform-openai-postgres.mp4">Watch the full 90-second example</a> ·
   <a href="docs/VIDEO_BRIEF_TEMPLATE.md">The brief template</a> ·
   <a href="docs/briefs/shortform-openai-postgres.md">A completed brief</a>
 </p>
@@ -52,14 +59,14 @@ npm run assets:check                            # contact sheet of every logo on
 
 ## Gallery
 
-Four compositions, four briefs, three canvas formats. Every frame range, hold, and on-screen string in the code came from the brief next to it.
+Four compositions, four briefs, three canvas formats. Full-quality MP4s are attached to the [latest release](https://github.com/SamRome1/showrunner/releases). Every frame range, hold, and on-screen string in the code came from the brief next to it.
 
 | | |
 |---|---|
-| <img src="docs/media/hero.gif" width="440" alt="ShortForm" /> | **ShortForm** · 1:1 · 90s<br/>OpenAI runs ChatGPT on one unsharded Postgres primary. Cited to Bohan Zhang, PGConf.dev 2025.<br/>[brief](docs/briefs/shortform-openai-postgres.md) · [mp4](docs/media/shortform-openai-postgres.mp4) · `src/scenes/` |
-| <img src="docs/media/release.gif" width="440" alt="Release" /> | **Release** · 1:1 · 50s<br/>The showrunner v0.1 launch video: the gate, the asset rule, the motion grammar, verification.<br/>[brief](docs/briefs/release.md) · [mp4](docs/media/release.mp4) · `src/scenes/release/` |
-| <img src="docs/media/bundle-sizes.gif" width="440" alt="BundleSizes" /> | **BundleSizes** · 16:9 · 54s<br/>Min+gzip runtime size of Preact, Solid, Svelte, Vue, and React from live bundlejs measurements. Official logos, one accent.<br/>[brief](docs/briefs/bundle-sizes.md) · [mp4](docs/media/bundle-sizes.mp4) · `src/scenes/bundle-sizes/` |
-| <img src="docs/media/vector-index.gif" width="248" alt="VectorIndex" /> | **VectorIndex** · 9:16 · 50s<br/>What an HNSW index does, with zero brand assets. The graph and the 8-hop search are computed at render time.<br/>[brief](docs/briefs/vector-index.md) · [mp4](docs/media/vector-index.mp4) · `src/scenes/vector-index/` |
+| <img src="docs/media/hero.gif" width="440" alt="ShortForm" /> | **ShortForm** · 1:1 · 90s<br/>OpenAI runs ChatGPT on one unsharded Postgres primary. Cited to Bohan Zhang, PGConf.dev 2025.<br/>[brief](docs/briefs/shortform-openai-postgres.md) · [mp4](https://github.com/SamRome1/showrunner/releases/download/v0.1.0/shortform-openai-postgres.mp4) · `src/scenes/` |
+| <img src="docs/media/release.gif" width="440" alt="Release" /> | **Release** · 1:1 · 50s<br/>The showrunner v0.1 launch video: the gate, the asset rule, the motion grammar, verification.<br/>[brief](docs/briefs/release.md) · [mp4](https://github.com/SamRome1/showrunner/releases/download/v0.1.0/release.mp4) · `src/scenes/release/` |
+| <img src="docs/media/bundle-sizes.gif" width="440" alt="BundleSizes" /> | **BundleSizes** · 16:9 · 54s<br/>Min+gzip runtime size of Preact, Solid, Svelte, Vue, and React from live bundlejs measurements. Official logos, one accent.<br/>[brief](docs/briefs/bundle-sizes.md) · [mp4](https://github.com/SamRome1/showrunner/releases/download/v0.1.0/bundle-sizes.mp4) · `src/scenes/bundle-sizes/` |
+| <img src="docs/media/vector-index.gif" width="248" alt="VectorIndex" /> | **VectorIndex** · 9:16 · 50s<br/>What an HNSW index does, with zero brand assets. The graph and the 8-hop search are computed at render time.<br/>[brief](docs/briefs/vector-index.md) · [mp4](https://github.com/SamRome1/showrunner/releases/download/v0.1.0/vector-index.mp4) · `src/scenes/vector-index/` |
 
 Two components carry the flagship: `ArchDiagram` (a system diagram with named slots that scenes populate and then collapse) and `ReplicaTopology` (one primary and 48 replicas, reused at half scale inside a boundary circle). The other examples added `Terminal`, `SizeBar`, `PointField`, and `GraphLayer` the same way: built once because a brief named them, then shared.
 
@@ -80,7 +87,7 @@ scripts/                    fetch-assets.mjs, stills.mjs
 
 ## Using it with other agents
 
-The rules are plain markdown in `CLAUDE.md`. Cursor picks them up through `.cursor/rules/`. For anything else, paste `CLAUDE.md` into the system prompt. The gate is a behavioral contract, not a plugin.
+The rules are plain markdown in `CLAUDE.md`, mirrored by `AGENTS.md` for Codex, Copilot, and Windsurf, and by `.cursor/rules/` for Cursor. For anything else, paste `CLAUDE.md` into the system prompt. The gate is a behavioral contract, not a plugin.
 
 ## Contributing
 

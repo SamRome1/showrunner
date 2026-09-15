@@ -49,7 +49,7 @@ The look is **dense, luminous, and always moving**. Every frame should attract t
 1. `npm run lint` clean on files you touched.
 2. Render one still per beat with `node scripts/stills.mjs <Id> <frames...>` and actually look at them. Tile with ffmpeg if there are many.
 3. Full render: `npx remotion render <Id> out/<Id>.mp4`.
-4. Report what you rendered, what you fixed, and any interpretation calls you made.
+4. Report what you rendered, what you fixed, and any interpretation calls you made. MP4s are gitignored — attach them to the GitHub Release; only GIFs and contact sheets are committed.
 5. Commit and push (`origin/main`) unless the user says otherwise.
 
 ## Layout

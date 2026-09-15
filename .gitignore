@@ -7,3 +7,6 @@ out
 # Logos are fetched at install time from their official sources (see assets.json)
 public/assets/*
 !public/assets/.gitkeep
+
+# Full renders live on GitHub Releases, not in the tree (see README gallery)
+docs/media/*.mp4
